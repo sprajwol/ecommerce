@@ -5,7 +5,7 @@ from . import views as base_views
 
 urlpatterns = [
     path('users/login/', base_views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('', base_views.getRoutes, name='routes'),
+    path('users/register/', base_views.registerUser, name='register'),
 
     path('users/', base_views.getUsers, name='users'),
     path('users/profile/', base_views.getUserProfile, name='user-profile'),
