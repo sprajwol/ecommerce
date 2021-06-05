@@ -59,3 +59,21 @@ def addOrderItems(request):
 
         serializer = OrderSerialier(order, many=False)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrderById(request, pk):
+    user = request.user
+    try:
+        order = Order.objects.get(_id=pk)
+        if(user.is_staff or order.user == user):
+            serializer = OrderSerialier(order, many=False)
+            return Response(serializer.data)
+        else:
+            Response(
+                {'detail': 'Not Authorized to view this order'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+    except:
+        return Response({'detail': 'Order does not exit.'}, status=status.HTTP_400_BAD_REQUEST)
