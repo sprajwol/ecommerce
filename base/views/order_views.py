@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.shortcuts import render
-from rest_framework import status
+from rest_framework import serializers, status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -60,6 +60,16 @@ def addOrderItems(request):
 
         serializer = OrderSerialier(order, many=False)
         return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getMyOrders(request):
+    user = request.user
+    orders = user.order_set.all()
+    serializer = OrderSerialier(orders, many=True)
+
+    return Response(serializer.data)
 
 
 @api_view(['GET'])
