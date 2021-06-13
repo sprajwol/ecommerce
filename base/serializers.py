@@ -6,7 +6,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from base.models import Product, Order, OrderItem, ShippingAddress
 
 
-class UserSerialier(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(read_only=True)
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
@@ -29,7 +29,7 @@ class UserSerialier(serializers.ModelSerializer):
         return name
 
 
-class UserSerializerWithToken(UserSerialier):
+class UserSerializerWithToken(UserSerializer):
     token = serializers.SerializerMethodField(read_only=True)
 
     class Meta:

@@ -50,7 +50,7 @@ function Header() {
                                     </Nav.Link>
                                 </LinkContainer>
                             )}
-                            {console.log('userInfo', userInfo)}
+
                             {userInfo && userInfo.isAdmin && (
                                 <NavDropdown title='Admin' id='adminmenue'>
                                     <LinkContainer to='/admin/userlist'>
