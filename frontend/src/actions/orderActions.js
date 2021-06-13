@@ -12,6 +12,7 @@ import { CART_CLEAR_ITEMS } from '../constants/cartConstants';
 
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
+        console.log('order222', order);
         dispatch({
             type: ORDER_CREATE_REQUEST,
         });
@@ -28,6 +29,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
         };
 
         const { data } = await axios.post(`/api/orders/add/`, order, config);
+        console.log('data222', data);
         dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
         dispatch({ type: CART_CLEAR_ITEMS, payload: data });
 
