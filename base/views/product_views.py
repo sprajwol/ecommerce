@@ -45,7 +45,7 @@ def createProduct(request):
 @api_view(['PUT'])
 @permission_classes([IsAdminUser])
 def updateProduct(request, pk):
-    data = request.date
+    data = request.data
 
     product = Product.objects.get(_id=pk)
     product.name = data['name']
